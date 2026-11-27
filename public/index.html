@@ -53,6 +53,36 @@ ul{padding-left:20px;margin:6px 0}
 .msg{padding:8px 11px;border-radius:12px;max-width:90%;font-size:15px;white-space:pre-wrap}.msg.ex{background:var(--card);border:2px solid var(--line);align-self:flex-start}.msg.st{background:var(--acc);color:var(--on);align-self:flex-end}
 .row{display:flex;gap:8px}.row button{flex:1}button.sec{background:transparent!important;color:var(--fg)!important;border:2px solid var(--line)!important}
 .hide{display:none}
+
+/* ===== REALISTIC LOOK ===== */
+:root{
+--grain:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.3 -0.04'/></filter><rect width='200' height='200' filter='url(%23n)'/></svg>");
+--wood:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='480' height='240'><filter id='f' x='0' y='0' width='100%25' height='100%25'><feTurbulence type='fractalNoise' baseFrequency='0.006 0.18' numOctaves='4' seed='7'/><feColorMatrix values='0 0 0 0 0.25 0 0 0 0 0.13 0 0 0 0 0.05 2.2 0 0 0 -0.75'/></filter><rect width='480' height='240' fill='%23b07a4c'/><rect width='480' height='240' filter='url(%23f)'/></svg>")}
+body{background:radial-gradient(ellipse at 50% -10%,rgba(255,255,255,.35),transparent 60%),var(--grain),var(--bg);background-blend-mode:normal,multiply,normal}
+.room{border:0;border-radius:16px;box-shadow:0 18px 40px rgba(0,0,0,.45),0 2px 0 rgba(255,255,255,.2) inset}
+.wall{background:radial-gradient(ellipse 80% 70% at 12% 0,rgba(255,247,222,.8),transparent 70%),var(--grain),linear-gradient(#ebe2cd,#cbbd9d);border-bottom:12px solid #6b4a2c;box-shadow:inset 0 -16px 22px rgba(0,0,0,.2);padding-bottom:14px}
+.board{background:radial-gradient(ellipse at 28% 25%,rgba(255,255,255,.16),transparent 60%),var(--grain),#2a4838;border:0;border-radius:3px;box-shadow:0 0 0 7px #9a6a3e,0 0 0 9px #5b3a20,0 12px 20px rgba(0,0,0,.5),inset 0 0 26px rgba(0,0,0,.55);font-family:"Bradley Hand","Chalkboard SE","Segoe Print",cursive;color:#f3f1e6;text-shadow:0 0 3px rgba(255,255,255,.35);padding:12px 8px;margin:6px 8px 0}
+.teacher{width:64px;height:72px;margin-top:12px;filter:drop-shadow(0 6px 6px rgba(0,0,0,.35))}
+.floor{background:linear-gradient(rgba(0,0,0,.4),transparent 38%),repeating-linear-gradient(90deg,rgba(0,0,0,.28) 0 2px,transparent 2px 70px),var(--wood);background-size:auto,auto,480px 240px;background-color:#b88a5e;padding-bottom:16px}
+.table{background-image:linear-gradient(105deg,rgba(255,255,255,.22),transparent 38%,rgba(0,0,0,.14)),var(--wood);background-size:auto,480px 240px;background-color:#a8744a;border-radius:8px;box-shadow:inset 0 2px 0 rgba(255,255,255,.35),0 10px 0 #5a3a1d,0 24px 30px rgba(0,0,0,.55);padding:16px 12px}
+.tok,.pf{border:0;color:#5a3d00;background:radial-gradient(circle at 32% 24%,#fffbd0 0,#f7d764 26%,#d9a521 62%,#a06f10 100%);box-shadow:inset 0 0 0 3px #ecc443,inset 0 0 0 5px rgba(120,80,0,.5),inset 0 -5px 7px rgba(90,55,0,.5),inset 0 4px 5px rgba(255,255,255,.75),0 4px 0 #84600e,0 9px 10px rgba(0,0,0,.5);text-shadow:0 1px 0 rgba(255,255,255,.65),0 -1px 0 rgba(90,55,0,.55);font-family:Georgia,serif}
+.tok:active{transform:none}
+.bagwrap svg{width:170px;height:170px;filter:drop-shadow(0 10px 8px rgba(0,0,0,.45))}
+.desksvg{display:block;width:100%;max-width:300px;margin:14px auto 0;filter:drop-shadow(0 5px 5px rgba(0,0,0,.4))}
+.bar{background:linear-gradient(#fff,#ece6d8);background:linear-gradient(var(--card),var(--bg));border:0;box-shadow:0 6px 14px rgba(0,0,0,.3),inset 0 1px 0 rgba(255,255,255,.5)}
+.timer{text-shadow:0 0 12px currentColor;letter-spacing:1px}
+.frame{border:0;border-radius:8px;padding:13px;background-image:linear-gradient(120deg,rgba(255,255,255,.25),transparent 40%,rgba(0,0,0,.18)),var(--wood);background-size:auto,480px 240px;background-color:#8a5a36;box-shadow:0 16px 30px rgba(0,0,0,.5),inset 0 2px 0 rgba(255,255,255,.3),inset 0 -3px 0 rgba(0,0,0,.4);position:relative;overflow:visible}
+.frame .scene{border-radius:2px;box-shadow:0 0 0 3px #3e2612,inset 0 0 45px rgba(0,0,0,.4)}
+.scene svg{filter:saturate(1.2) contrast(1.07)}
+.scene::after{content:"";position:absolute;inset:0;pointer-events:none;background:var(--grain),radial-gradient(ellipse at center,transparent 50%,rgba(0,0,0,.4));mix-blend-mode:multiply;opacity:.55}
+.glass{position:absolute;inset:13px;pointer-events:none;border-radius:2px;background:linear-gradient(#4a2d16,#4a2d16) center/4px 100% no-repeat,linear-gradient(#4a2d16,#4a2d16) center/100% 4px no-repeat,linear-gradient(115deg,rgba(255,255,255,.3) 0,transparent 26%,transparent 62%,rgba(255,255,255,.13) 100%)}
+.msg.ex,.bubble,.g,.final{box-shadow:0 4px 10px rgba(0,0,0,.18);background-image:var(--grain);background-blend-mode:multiply}
+.msg.st{box-shadow:0 4px 10px rgba(0,0,0,.25);background-image:linear-gradient(rgba(255,255,255,.18),transparent)}
+button.main{background-image:linear-gradient(rgba(255,255,255,.28),rgba(0,0,0,.18));box-shadow:0 4px 0 rgba(0,0,0,.35),0 10px 16px rgba(0,0,0,.25);text-shadow:0 1px 1px rgba(0,0,0,.3)}
+button.main:active{transform:translateY(2px);box-shadow:0 2px 0 rgba(0,0,0,.35)}
+textarea{box-shadow:inset 0 3px 6px rgba(0,0,0,.18)}
+.final{box-shadow:0 0 0 2px var(--acc),0 14px 24px rgba(0,0,0,.3)}
+.paper{display:none}
 </style></head><body>
 <div class="wrap">
 
@@ -71,14 +101,14 @@ ul{padding-left:20px;margin:6px 0}
  <div class="room">
   <div class="wall">
    <div class="board"><b>ÚSTNÍ MATURITNÍ ZKOUŠKA 2026</b><br>Anglický jazyk · Speaking</div>
-   <div class="examiner">👩‍🏫</div>
+   <svg class="teacher" viewBox="0 0 80 90"><defs><linearGradient id="sk" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f8dcc3"/><stop offset="1" stop-color="#deae88"/></linearGradient><linearGradient id="bz" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#40495c"/><stop offset="1" stop-color="#1c2330"/></linearGradient></defs><path d="M6 90Q8 60 40 56Q72 60 74 90Z" fill="url(#bz)"/><path d="M31 57L40 78L49 57Z" fill="#f4f4f4"/><rect x="34" y="44" width="12" height="15" rx="5" fill="#dcab86"/><path d="M16 36Q12 8 42 5Q70 8 64 36Q62 14 40 14Q22 14 16 36Z" fill="#4b2f20"/><ellipse cx="40" cy="34" rx="19" ry="23" fill="url(#sk)"/><path d="M19 30Q22 8 42 8Q62 10 62 30Q56 15 40 17Q26 17 19 30Z" fill="#4b2f20"/><circle cx="32" cy="35" r="6.5" fill="rgba(255,255,255,.25)" stroke="#2d2d2d" stroke-width="1.6"/><circle cx="48" cy="35" r="6.5" fill="rgba(255,255,255,.25)" stroke="#2d2d2d" stroke-width="1.6"/><path d="M38.5 35h3" stroke="#2d2d2d" stroke-width="1.6"/><circle cx="32" cy="35" r="1.7" fill="#2b1d14"/><circle cx="48" cy="35" r="1.7" fill="#2b1d14"/><path d="M34 47Q40 52 46 47" stroke="#a4564a" stroke-width="2.2" fill="none" stroke-linecap="round"/></svg>
    <div class="hint" id="exh">Examiner: “These are the topic numbers. I will shuffle them.”</div>
   </div>
   <div class="floor">
    <div class="table">
     <div class="tokens" id="tokens"></div>
-    <div id="bagzone" class="hide"><div class="bagwrap"><svg id="bag" viewBox="0 0 120 120"><path d="M30 42Q8 82 22 108Q60 124 98 108Q112 82 90 42Z" fill="#c62828"/><path d="M36 42Q60 30 84 42L92 26Q60 10 28 26Z" fill="#a31f1f"/><path d="M38 36Q60 48 82 36" stroke="#f1c40f" stroke-width="3" fill="none"/><circle cx="82" cy="38" r="4" fill="#f1c40f"/><path d="M40 60Q34 84 42 100" stroke="#ff8a80" stroke-width="4" fill="none" opacity=".5"/></svg></div><div class="cnt" id="cnt"></div><div class="pz" id="pull"></div></div>
-    <div class="desk"><div class="paper">📄 Paper</div><div class="paper" style="transform:rotate(3deg)">🖊️ Pen</div></div>
+    <div id="bagzone" class="hide"><div class="bagwrap"><svg id="bag" viewBox="0 0 140 150"><defs><radialGradient id="bg1" cx=".34" cy=".3" r=".85"><stop offset="0" stop-color="#ef5350"/><stop offset=".5" stop-color="#c62828"/><stop offset="1" stop-color="#6d0f0f"/></radialGradient><linearGradient id="bg2" x1="0" x2="1"><stop offset="0" stop-color="#7f1212"/><stop offset=".5" stop-color="#d32f2f"/><stop offset="1" stop-color="#7f1212"/></linearGradient></defs><ellipse cx="70" cy="140" rx="46" ry="7" fill="rgba(0,0,0,.35)"/><path d="M38 52Q8 92 20 128Q70 148 120 128Q132 92 102 52Z" fill="url(#bg1)"/><path d="M52 62Q34 96 40 126M70 60Q66 98 70 134M88 62Q104 96 98 126" stroke="#5c0c0c" stroke-width="3" fill="none" opacity=".45"/><path d="M60 66Q48 96 52 124M80 66Q92 98 86 126" stroke="#ff8a80" stroke-width="2.5" fill="none" opacity=".35"/><path d="M42 54Q70 40 98 54L108 30Q70 8 32 30Z" fill="url(#bg2)"/><path d="M44 30Q70 20 96 30M42 40Q70 30 98 40" stroke="#4a0808" stroke-width="2" fill="none" opacity=".6"/><path d="M40 48Q70 62 100 48" stroke="#e6b422" stroke-width="3.2" fill="none"/><path d="M40 48Q70 58 100 48" stroke="#fff3b0" stroke-width="1" fill="none" opacity=".8"/><circle cx="100" cy="49" r="4.5" fill="#e6b422"/><path d="M100 52L108 74M100 52L98 76" stroke="#e6b422" stroke-width="2.5"/><circle cx="108" cy="77" r="3" fill="#c9981a"/><circle cx="98" cy="79" r="3" fill="#c9981a"/><ellipse cx="50" cy="86" rx="9" ry="22" fill="#fff" opacity=".13" transform="rotate(14 50 86)"/></svg></div><div class="cnt" id="cnt"></div><div class="pz" id="pull"></div></div>
+    <svg class="desksvg" viewBox="0 0 280 84"><defs><linearGradient id="pp" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fffef8"/><stop offset="1" stop-color="#ebe6d2"/></linearGradient></defs><g transform="rotate(-4 90 44)"><rect x="24" y="8" width="140" height="68" rx="2" fill="url(#pp)" stroke="rgba(0,0,0,.18)"/><path d="M36 26H152M36 38H152M36 50H152M36 62H120" stroke="#9ab6d6" stroke-width="1"/><path d="M34 8V76" stroke="#e08a8a" stroke-width="1"/><path d="M40 21q8-6 14 0t14 0" stroke="#33415c" stroke-width="1.4" fill="none"/></g><g transform="rotate(14 220 44)"><rect x="170" y="38" width="100" height="9" rx="4.5" fill="#1c2a44"/><rect x="170" y="38" width="100" height="3" rx="1.5" fill="#fff" opacity=".35"/><rect x="206" y="35" width="42" height="3" rx="1.5" fill="#d9aa2c"/><path d="M270 38L284 42.5L270 47Z" fill="#cfc7b4"/></g></svg>
    </div>
    <button class="main" id="shuf">Zamíchat a vložit do pytlíku</button>
    <button class="main hide" id="grab">Sáhnout do pytlíku</button>
@@ -88,7 +118,7 @@ ul{padding-left:20px;margin:6px 0}
 
 <div id="v-exam" class="hide">
  <div class="bar"><div><b id="topic"></b><div class="place" id="place"></div></div><div class="timer" id="timer">5:00</div></div>
- <div class="room"><div class="scene" id="scene"></div></div>
+ <div class="room frame"><div class="scene" id="scene"></div><div class="glass"></div></div>
  <div class="chat" id="chat"></div>
  <textarea id="ans" style="min-height:80px" placeholder="Napiš odpověď examinerovi (celými větami)…"></textarea>
  <div class="row"><button class="main" id="send">Odeslat</button><button class="main sec" id="fin">Ukončit</button></div>
@@ -134,19 +164,20 @@ var T=[
 var P=["🏰🚋🌉","📚✏️🎒","⚽🏀🥅","📡💻🎙️","🍝🥘🍰","👨‍👩‍👧🎂🐕","🌲🍺🏡","⛪🚲🌳","🛒👟👜","🧳🌴🛫","💼💻📎","🛋️🖼️🪴","🎭🎨🎻","☂️🚌👑","🎓🚀🗺️","🗽🍔🚕","🥗🏃🩺","👗👠🧥","🎸🎮🚴","☀️🌧️❄️"];
 var $=function(i){return document.getElementById(i)};
 var used={},cur=null,tick=null,left=300,done=false,qs=[],pool=[],drawn=-1,busy=false;
-function R(x,y,w,h,c){return '<rect x="'+x+'" y="'+y+'" width="'+w+'" height="'+h+'" fill="'+c+'"/>';}
+function R(x,y,w,h,c){var r='<rect x="'+x+'" y="'+y+'" width="'+w+'" height="'+h+'" fill="'+c+'"/>';if(c.charAt(0)==="#"&&w*h>60)r+='<rect x="'+x+'" y="'+y+'" width="'+w+'" height="'+h+'" fill="url(#sh)"/><rect x="'+x+'" y="'+y+'" width="'+w+'" height="'+h+'" fill="url(#sd)"/>';return r;}
+var HZ='<rect x="0" y="50" width="400" height="100" fill="url(#hz)"/>';
 function bw(x,y,w,h,c){return R(x,y,w,h,c)+R(x,y,w,h,"url(#wn)");}
 function tri(x,y,ax,ay,f){return '<polygon points="'+x+','+y+' '+ax+','+ay+' '+(2*ax-x)+','+y+'" fill="'+f+'"/>';}
 function cl(x,y,k){return '<g class="cl"><ellipse cx="'+x+'" cy="'+y+'" rx="'+22*k+'" ry="'+8*k+'" fill="#fff" opacity=".85"/><ellipse cx="'+(x+14*k)+'" cy="'+(y-6*k)+'" rx="'+13*k+'" ry="'+8*k+'" fill="#fff" opacity=".85"/></g>';}
 function rip(y,c){var h="";for(var i=0;i<9;i++)h+='<path d="M'+(i*46+8)+' '+(y+(i%3)*9)+' q10 -4 20 0" stroke="'+c+'" stroke-width="1.5" fill="none"/>';return h;}
 function scn(type,idx){
- var s='<svg class="sk" viewBox="0 0 400 190" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="wn" width="9" height="11" patternUnits="userSpaceOnUse"><rect x="2" y="2" width="4" height="6" fill="#ffe9a0"/></pattern></defs>';
+ var s='<svg class="sk" viewBox="0 0 400 190" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="wn" width="9" height="11" patternUnits="userSpaceOnUse"><rect x="1.5" y="2" width="5" height="6.5" fill="#6d8fae"/><rect x="1.5" y="2" width="5" height="3" fill="#bcd6ea" opacity=".7"/><rect x="1.5" y="2" width="5" height="6.5" fill="none" stroke="#2c3440" stroke-width=".6"/></pattern><linearGradient id="sh" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".18"/><stop offset=".55" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".3"/></linearGradient><linearGradient id="sd" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#000" stop-opacity=".22"/><stop offset=".5" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#fff" stop-opacity=".14"/></linearGradient><radialGradient id="cb" cx=".35" cy=".3" r=".8"><stop offset="0" stop-color="#fff" stop-opacity=".4"/><stop offset=".55" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".28"/></radialGradient><linearGradient id="hz" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".75" stop-color="#fff" stop-opacity=".4"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient><radialGradient id="sun" cx=".85" cy=".15" r=".9"><stop offset="0" stop-color="#fff6d0" stop-opacity=".6"/><stop offset=".5" stop-color="#ffe9a8" stop-opacity=".12"/><stop offset="1" stop-color="#ffe9a8" stop-opacity="0"/></radialGradient><linearGradient id="bt" x1="0" y1="0" x2="0" y2="1"><stop offset=".6" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".35"/></linearGradient><filter id="rl" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="4" result="t"/><feDisplacementMap in="SourceGraphic" in2="t" scale="2.4"/></filter><filter id="nz" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="3" seed="2"/><feColorMatrix values="0 0 0 0 .2 0 0 0 0 .18 0 0 0 0 .15 0 0 0 .9 -.25"/></filter></defs><g filter="url(#rl)">';
  var i;
  if(type==="prague"){
   s+=cl(60,28,1)+cl(250,44,1.2)+'<circle cx="345" cy="34" r="15" fill="#ffd36b"/><path d="M0 140Q70 80 160 108T300 118V150H0Z" fill="#8fa98a"/>';
   s+=bw(22,98,118,40,"#d9c9a8")+R(60,62,14,40,"#b8a78e")+tri(58,62,67,26,"#5b7a6a")+R(90,70,14,34,"#b8a78e")+tri(88,70,97,38,"#5b7a6a");
   for(i=0;i<8;i++){s+=bw(140+i*28,108+(i%2)*6,26,36,["#e9d8b8","#d9b99b","#eadfc9"][i%3])+tri(138+i*28,108+(i%2)*6,153+i*28,92+(i%2)*6,"#a8402f").replace('points="'+(138+i*28)+' '+(108+(i%2)*6)+' '+(153+i*28),'points="'+(140+i*28)+' '+(108+(i%2)*6)+' '+(153+i*28));}
-  s+=R(0,144,400,46,"#4f8fc0")+rip(152,"#bfe0f5")+rip(172,"#8fc0e3");
+  s+=HZ+R(0,144,400,46,"#4f8fc0")+rip(152,"#bfe0f5")+rip(172,"#8fc0e3");
   s+=R(110,134,250,10,"#6b5c4a");for(i=0;i<6;i++)s+='<path d="M'+(125+i*38)+' 144q14 -18 28 0z" fill="#4f8fc0"/>';
   s+=R(104,114,14,30,"#5e5040")+tri(102,114,111,98,"#3b3228")+R(352,114,14,30,"#5e5040")+tri(350,114,359,98,"#3b3228");
  }else if(type==="london"){
@@ -161,7 +192,7 @@ function scn(type,idx){
   s+=cl(80,26,1)+cl(300,40,1.1)+'<circle cx="350" cy="36" r="16" fill="#ffd36b"/>';
   for(i=0;i<10;i++)s+=bw(96+i*30,50+((i*47)%60),26,100-((i*47)%60),i%2?"#4b5a70":"#35435a");
   s+=bw(206,24,24,126,"#5b6b82")+R(216,8,3,18,"#aab");
-  s+=R(0,148,400,42,"#3f7fb5")+rip(156,"#bcd9ef")+'<ellipse cx="46" cy="150" rx="34" ry="7" fill="#7a8a6a"/>'+R(38,126,16,24,"#b8b2a0")+R(40,96,12,32,"#6fae94")+tri(36,98,46,84,"#6fae94")+tri(46,84,56,98,"#6fae94")+'<path d="M52 100L62 72" stroke="#6fae94" stroke-width="4"/><circle cx="62" cy="69" r="5" fill="#ffc107"/>';
+  s+=HZ+R(0,148,400,42,"#3f7fb5")+rip(156,"#bcd9ef")+'<ellipse cx="46" cy="150" rx="34" ry="7" fill="#7a8a6a"/>'+R(38,126,16,24,"#b8b2a0")+R(40,96,12,32,"#6fae94")+tri(36,98,46,84,"#6fae94")+tri(46,84,56,98,"#6fae94")+'<path d="M52 100L62 72" stroke="#6fae94" stroke-width="4"/><circle cx="62" cy="69" r="5" fill="#ffc107"/>';
   s+=R(0,172,400,18,"#444")+R(240,160,44,14,"#f5c518")+R(252,152,20,9,"#f5c518")+R(255,154,14,6,"#d6eaf8")+'<circle cx="252" cy="175" r="5" fill="#222"/><circle cx="274" cy="175" r="5" fill="#222"/>';
  }else if(type==="hk"){
   s+=cl(60,28,1)+cl(300,38,1.1)+'<circle cx="352" cy="30" r="14" fill="#ffd36b"/>'+R(0,148,400,42,"#c9b896");
@@ -173,12 +204,12 @@ function scn(type,idx){
  }else if(type==="cz"){
   s+=cl(70,26,1)+cl(260,40,1.2)+'<circle cx="345" cy="34" r="15" fill="#ffd36b"/><path d="M0 120Q90 60 190 100T400 80V190H0Z" fill="#8fbf86"/><path d="M0 150Q120 100 240 140T400 130V190H0Z" fill="#6aa86a"/>';
   s+=bw(280,52,60,40,"#c9b9a0")+R(272,38,16,54,"#bfae92")+R(334,34,16,58,"#bfae92")+tri(270,38,280,18,"#7a3b3b")+tri(332,34,342,12,"#7a3b3b")+'<path d="M342 12V0" stroke="#555"/>'+R(342,0,14,3,"#d32f2f")+R(342,3,14,3,"#fff");
-  for(i=0;i<5;i++)s+=bw(30+i*36,128+(i%2)*8,28,22,"#efe5d0")+tri(28+i*36,128+(i%2)*8,44+i*36,112+(i%2)*8,"#b5452f").replace('points="'+(28+i*36)+' ','points="'+(28+i*36)+' ');
+  s+=HZ;for(i=0;i<5;i++)s+=bw(30+i*36,128+(i%2)*8,28,22,"#efe5d0")+tri(28+i*36,128+(i%2)*8,44+i*36,112+(i%2)*8,"#b5452f").replace('points="'+(28+i*36)+' ','points="'+(28+i*36)+' ');
   for(i=0;i<6;i++)s+=tri(215+i*24,172,227+i*24,142-(i%2)*10,"#2f6a3f")+tri(218+i*24,172,227+i*24,152-(i%2)*10,"#3f8a4f");
  }else{s+=(G[idx]||function(){return"";})();}
- return s+'</svg>';
+ return s+'</g><rect width="400" height="190" fill="url(#sun)" style="mix-blend-mode:screen"/><rect width="400" height="190" fill="url(#bt)"/><rect width="400" height="190" filter="url(#nz)" opacity=".5" style="mix-blend-mode:multiply"/></svg>';
 }
-function c(x,y,r,f){return '<circle cx="'+x+'" cy="'+y+'" r="'+r+'" fill="'+f+'"/>';}
+function c(x,y,r,f){var q='<circle cx="'+x+'" cy="'+y+'" r="'+r+'" fill="';return q+f+'"/>'+(r>5?q+'url(#cb)"/>':"");}
 function tx(x,y,z,t,f){return '<text x="'+x+'" y="'+y+'" font-size="'+z+'" text-anchor="middle"'+(f?' fill="'+f+'"':'')+' font-family="system-ui,sans-serif" font-weight="700">'+t+'</text>';}
 function tr(x,y,r){return R(x-4,y,8,r,"#7a5230")+c(x,y-6,r*.8,"#3f8a4f");}
 var G={
@@ -223,24 +254,31 @@ $("grab").addEventListener("click",function(){
 function show(id){["v-tut","v-draw","v-exam","v-res"].forEach(function(x){$(x).classList.toggle("hide",x!==id);});window.scrollTo(0,0);}
 function fmt(s){return Math.floor(s/60)+":"+String(s%60).padStart(2,"0");}
 async function getSample(){
- var f=async function(p){var r=await fetch(API_URL,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({prompt:p})});var j=await r.json();if(!r.ok||j.error)throw new Error(j.error||"api");return {text:j.text};};
+ var f=async function(p){var r=await fetch(API_URL,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({prompt:p})});var j={};try{j=await r.json();}catch(e){throw new Error("Server vrátil HTTP "+r.status+" – zkontroluj, že Worker běží a že existuje adresa /api");}if(!r.ok||j.error)throw new Error(j.error||("HTTP "+r.status));return {text:j.text};};
  f.json=async function(p){var r=await f(p),t=r.text,a=t.indexOf("{"),b=t.lastIndexOf("}");return JSON.parse(t.slice(a,b+1));};
  return f;
 }
 var hist=[],waiting=false,sm=null;
 function addMsg(w,t){var d=document.createElement("div");d.className="msg "+w;d.textContent=(w==="ex"?"👩‍🏫 ":"")+t;$("chat").appendChild(d);$("chat").scrollTop=1e5;return d;}
 function tr_(){return hist.map(function(m){return (m.r==="ex"?"EXAMINER: ":"STUDENT: ")+m.t;}).join("\n");}
+var retryFlag=null,errEl=null,lastErr="";
 async function examTurn(first){
+ if(errEl){errEl.remove();errEl=null;}
  waiting=true;$("send").disabled=true;var ty=addMsg("ex","…"),t=T[cur],q=null;
- try{sm=sm||await getSample();if(!sm)throw 0;
-  var r=await sm("You are a friendly Czech maturita English oral examiner in "+t[3]+". Topic: \""+t[0]+"\". Student level B1–B2. This is a 5-minute spoken conversation, typed. "+(first?"Greet the student in one short sentence and ask ONE simple opening question about the topic.":"React to the student's last answer in max one short natural sentence (no grading), then ask ONE follow-up question that goes deeper or moves to another aspect of the topic. If the answer was very short, ask them to say more.")+" Output only what the examiner says, max 40 words, English.\n\nCONVERSATION SO FAR:\n"+tr_(),{cache:false});
-  q=(r.text||"").trim();}catch(e){q=null;}
- if(!q)q=first?"Good morning. Can you tell me something about the topic “"+t[0]+"”?":"I see. Can you tell me more about that?";
+ var asked=hist.filter(function(m){return m.r==="ex";}).map(function(m){return "- "+m.t;}).join("\n")||"(none yet)";
+ var prompt="You are a warm, experienced Czech teacher of English acting as the examiner in an oral maturita exam. Setting: "+t[3]+". Topic: \""+t[0]+"\". Student level B1–B2. This is a natural 5-minute conversation (typed), about "+(300-Math.max(left,0))+" seconds in. You replace a real teacher, so behave like one.\n\n"+
+ (first?"TASK: Greet the student in one short sentence and ask ONE easy opening question about the topic.":
+ "TASK: Continue the conversation.\n1) Pick up a SPECIFIC detail the student just said and react to it in one short natural sentence (show real interest, e.g. 'Oh, really?' or 'That sounds fun.').\n2) Then ask ONE follow-up question about THAT detail: why, how, what happened, an example, their opinion, a comparison with the Czech Republic, or a hypothetical ('What would you do if…?').\n3) If the answer was short or vague, ask them to explain or give an example.\n4) After 3–4 turns on one aspect, move to a related aspect of the topic.")+
+ "\n\nRULES: Never repeat or rephrase a question you already asked. Do not correct mistakes explicitly. No grading, no lists, no greeting after the first turn. English only, max 40 words. Output ONLY what the examiner says.\n\nQUESTIONS YOU ALREADY ASKED:\n"+asked+"\n\nCONVERSATION SO FAR:\n"+tr_()+"\n\nEXAMINER:";
+ for(var n=0;n<2&&!q;n++){
+  try{sm=sm||await getSample();if(!sm)break;var r=await sm(prompt,{cache:false});q=(r.text||"").trim().replace(/^EXAMINER:\s*/i,"");}catch(e){q=null;lastErr=String(e.message||e);}
+ }
  if(done){ty.remove();return;}
+ if(!q){ty.textContent="⚠️ Examiner neodpověděl. "+(lastErr?"Důvod: "+lastErr.slice(0,220)+". ":"")+"Klepni na Odeslat a zkus to znovu.";errEl=ty;retryFlag=first;waiting=false;$("send").disabled=false;return;}
  ty.textContent="👩‍🏫 "+q;hist.push({r:"ex",t:q});waiting=false;$("send").disabled=false;$("chat").scrollTop=1e5;
 }
 function start(i){
- cur=i;used[i]=true;done=false;left=300;hist=[];var t=T[i];
+ cur=i;used[i]=true;done=false;left=300;hist=[];retryFlag=null;errEl=null;var t=T[i];
  $("topic").textContent=(i+1)+". "+t[0];$("place").textContent="📍 "+t[3];
  var sc=$("scene");sc.style.background="linear-gradient("+t[4]+","+t[5]+")";sc.innerHTML=scn(t[1],i);
  $("chat").innerHTML="";$("ans").value="";$("send").disabled=true;$("fin").disabled=false;show("v-exam");
@@ -248,7 +286,7 @@ function start(i){
  tick=setInterval(function(){left--;$("timer").textContent=fmt(Math.max(left,0));$("timer").classList.toggle("low",left<=60);if(left<=0){clearInterval(tick);finish();}},1000);
  examTurn(true);
 }
-$("send").addEventListener("click",function(){var v=$("ans").value.trim();if(!v||waiting||done)return;addMsg("st",v);hist.push({r:"st",t:v});$("ans").value="";examTurn(false);});
+$("send").addEventListener("click",function(){var v=$("ans").value.trim();if(waiting||done)return;if(!v){if(retryFlag!==null){var f=retryFlag;retryFlag=null;examTurn(f);}return;}retryFlag=null;addMsg("st",v);hist.push({r:"st",t:v});$("ans").value="";examTurn(false);});
 $("fin").addEventListener("click",function(){finish();});
 async function finish(){
  if(done)return;done=true;clearInterval(tick);$("send").disabled=true;$("fin").disabled=true;
@@ -266,7 +304,7 @@ async function finish(){
   var avg=Math.round(sum/4);$("gr").innerHTML=h;$("fg").textContent=early?5:avg;if(early)$("fl").textContent="Celková známka (časové minimum nesplněno) · dílčí průměr "+avg;$("rep").textContent="👩‍🏫 "+String(r.reply||"");
   var tp=(r.tips||[]).map(function(x){return "• "+x;}).join("\n");
   $("cm").style.whiteSpace="pre-line";$("cm").textContent=String(r.comment||"")+(tp?"\n\n"+tp:"");
- }catch(e){$("fg").textContent="–";$("rep").textContent="Hodnocení se nepodařilo načíst. Zkus to prosím znovu.";}
+ }catch(e){$("fg").textContent="–";$("rep").textContent="Hodnocení se nepodařilo načíst: "+String(e.message||e).slice(0,200);}
 }
 $("again").addEventListener("click",function(){if(!pool.length)newRound();else{showBag();}show("v-draw");});
 newRound();
