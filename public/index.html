@@ -254,8 +254,8 @@ $("grab").addEventListener("click",function(){
 function show(id){["v-tut","v-draw","v-exam","v-res"].forEach(function(x){$(x).classList.toggle("hide",x!==id);});window.scrollTo(0,0);}
 function fmt(s){return Math.floor(s/60)+":"+String(s%60).padStart(2,"0");}
 async function getSample(){
- var f=async function(p){var r=await fetch(API_URL,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({prompt:p})});var j={};try{j=await r.json();}catch(e){throw new Error("Server vrátil HTTP "+r.status+" – zkontroluj, že Worker běží a že existuje adresa /api");}if(!r.ok||j.error)throw new Error(j.error||("HTTP "+r.status));return {text:j.text};};
- f.json=async function(p){var r=await f(p),t=r.text,a=t.indexOf("{"),b=t.lastIndexOf("}");return JSON.parse(t.slice(a,b+1));};
+ var f=async function(p,o){o=o||{};var r=await fetch(API_URL,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({prompt:p,fast:!!o.fast,max:o.max||0})});var j={};try{j=await r.json();}catch(e){throw new Error("Server vrátil HTTP "+r.status+" – zkontroluj, že Worker běží a že existuje adresa /api");}if(!r.ok||j.error)throw new Error(j.error||("HTTP "+r.status));return {text:j.text};};
+ f.json=async function(p,o){var r=await f(p,o),t=r.text,a=t.indexOf("{"),b=t.lastIndexOf("}");return JSON.parse(t.slice(a,b+1));};
  return f;
 }
 var hist=[],waiting=false,sm=null;
@@ -271,7 +271,7 @@ async function examTurn(first){
  "TASK: Continue the conversation.\n1) Pick up a SPECIFIC detail the student just said and react to it in one short natural sentence (show real interest, e.g. 'Oh, really?' or 'That sounds fun.').\n2) Then ask ONE follow-up question about THAT detail: why, how, what happened, an example, their opinion, a comparison with the Czech Republic, or a hypothetical ('What would you do if…?').\n3) If the answer was short or vague, ask them to explain or give an example.\n4) After 3–4 turns on one aspect, move to a related aspect of the topic.")+
  "\n\nRULES: Never repeat or rephrase a question you already asked. Do not correct mistakes explicitly. No grading, no lists, no greeting after the first turn. English only, max 40 words. Output ONLY what the examiner says.\n\nQUESTIONS YOU ALREADY ASKED:\n"+asked+"\n\nCONVERSATION SO FAR:\n"+tr_()+"\n\nEXAMINER:";
  for(var n=0;n<2&&!q;n++){
-  try{sm=sm||await getSample();if(!sm)break;var r=await sm(prompt,{cache:false});q=(r.text||"").trim().replace(/^EXAMINER:\s*/i,"");}catch(e){q=null;lastErr=String(e.message||e);}
+  try{sm=sm||await getSample();if(!sm)break;var r=await sm(prompt,{fast:true,max:160});q=(r.text||"").trim().replace(/^EXAMINER:\s*/i,"");}catch(e){q=null;lastErr=String(e.message||e);}
  }
  if(done){ty.remove();return;}
  if(!q){ty.textContent="⚠️ Examiner neodpověděl. "+(lastErr?"Důvod: "+lastErr.slice(0,220)+". ":"")+"Klepni na Odeslat a zkus to znovu.";errEl=ty;retryFlag=first;waiting=false;$("send").disabled=false;return;}
@@ -283,7 +283,7 @@ function start(i){
  var sc=$("scene");sc.style.background="linear-gradient("+t[4]+","+t[5]+")";sc.innerHTML=scn(t[1],i);
  $("chat").innerHTML="";$("ans").value="";$("send").disabled=true;$("fin").disabled=false;show("v-exam");
  clearInterval(tick);$("timer").textContent="5:00";$("timer").classList.remove("low");
- tick=setInterval(function(){left--;$("timer").textContent=fmt(Math.max(left,0));$("timer").classList.toggle("low",left<=60);if(left<=0){clearInterval(tick);finish();}},1000);
+ tick=setInterval(function(){if(!waiting)left--;$("timer").textContent=fmt(Math.max(left,0));$("timer").classList.toggle("low",left<=60);if(left<=0){clearInterval(tick);finish();}},1000);
  examTurn(true);
 }
 $("send").addEventListener("click",function(){var v=$("ans").value.trim();if(waiting||done)return;if(!v){if(retryFlag!==null){var f=retryFlag;retryFlag=null;examTurn(f);}return;}retryFlag=null;addMsg("st",v);hist.push({r:"st",t:v});$("ans").value="";examTurn(false);});
@@ -298,7 +298,7 @@ async function finish(){
  var m=await getSample();
  if(!m){$("fg").textContent="–";$("rep").textContent="AI zkoušející není v tomto zobrazení dostupná.";return;}
  try{
-  var r=await m.json("You are a strict but fair Czech maturita English oral examiner (level B1–B2). Below is a typed conversation on the topic \""+t[0]+"\" ("+sec+" seconds long). Grade ONLY the STUDENT lines like Czech maturita, 1 (best) to 5 (worst): vocab (vocabulary range), grammar (accuracy), fluency (interaction, coherence, ability to develop answers), content (task fulfilment, relevance, depth). Return ONLY JSON: {\"vocab\":int,\"grammar\":int,\"fluency\":int,\"content\":int,\"reply\":\"examiner's closing remark in English, 1-2 sentences\",\"comment\":\"feedback in Czech, 3-4 sentences, quote 2 concrete errors with corrections in English\",\"tips\":[\"2 short tips in Czech\"]}\n\nCONVERSATION:\n"+tr_(),{cache:false});
+  var r=await m.json("You are a strict but fair Czech maturita English oral examiner (level B1–B2). Below is a typed conversation on the topic \""+t[0]+"\" ("+sec+" seconds long). Grade ONLY the STUDENT lines like Czech maturita, 1 (best) to 5 (worst): vocab (vocabulary range), grammar (accuracy), fluency (interaction, coherence, ability to develop answers), content (task fulfilment, relevance, depth). Return ONLY JSON: {\"vocab\":int,\"grammar\":int,\"fluency\":int,\"content\":int,\"reply\":\"examiner's closing remark in English, 1-2 sentences\",\"comment\":\"feedback in Czech, 3-4 sentences, quote 2 concrete errors with corrections in English\",\"tips\":[\"2 short tips in Czech\"]}\n\nCONVERSATION:\n"+tr_(),{max:1500});
   var k=[["vocab","Slovní zásoba"],["grammar","Gramatika"],["fluency","Plynulost a interakce"],["content","Obsah a téma"]],sum=0,h="";
   k.forEach(function(x){var v=Math.min(5,Math.max(1,Math.round(+r[x[0]]||3)));sum+=v;h+='<div class="g"><div class="n">'+v+'</div><small>'+x[1]+'</small></div>';});
   var avg=Math.round(sum/4);$("gr").innerHTML=h;$("fg").textContent=early?5:avg;if(early)$("fl").textContent="Celková známka (časové minimum nesplněno) · dílčí průměr "+avg;$("rep").textContent="👩‍🏫 "+String(r.reply||"");
